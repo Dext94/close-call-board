@@ -1,14 +1,14 @@
-# Close Call Live Board
+# Close Call Leaderboard
 
 An open-source, read-only community interface for FLOP Labs' Close Call challenge.
 
 Built for the FLOP community by [@fuegonchain 🔥](https://x.com/fuegonchain), in response to the request attributed to Arthur Hayes in [this post](https://x.com/CryptoHayes/status/2103974307806564467). No endorsement by FLOP Labs or Arthur Hayes is implied. The post itself was not independently verified in this audit.
 
-**Live URL:** Pages deployment pending. **Repository URL:** https://github.com/Dext94/close-call-board
+**Live URL:** https://dext94.github.io/close-call-board/ **Repository URL:** https://github.com/Dext94/close-call-board
 
 ## Features
 
-- Explicitly labelled **Referee Published PnL — Top 25**, not a complete owner ranking.
+- Explicitly labelled **Live Referee Leaderboard — Published Top 25**, not a complete owner ranking.
 - Exact decimal comparison of published scores, provisional equal-score place spans and open-ended cutoff groups. No fabricated prize allocation.
 - Search exact or partial, case-sensitive DIDs in records actually observed during the session, with source and sweep provenance. No inference from absence.
 - Largest published positions and long/short **owner counts**, separate from open interest. PnL/position joins require matching sweep and file hash.
@@ -50,7 +50,7 @@ This dashboard does not reconstruct hidden referee state and does not estimate m
 - A source omission field that is absent is labelled “Not published”, not silently set to zero.
 - Search covers this session's observed public payloads. Historical presence does not prove current position or balance.
 - No locally fabricated rankings, sample live data or fallback snapshots are served to users. Test fixtures are clearly isolated in the clearly named fixture/test files.
-- Browser/mobile layout, browser refresh, console and actual GitHub Pages cross-origin checks remain outstanding because this environment's cloud browser blocks Technocore and localhost. HTTP tests with the intended GitHub Pages Origin succeeded and returned `Access-Control-Allow-Origin: *`; that is not an end-to-end Pages browser test.
+- The public GitHub Pages deployment has loaded in Chrome and the five Technocore feeds populated successfully. Mobile layout, 200% text enlargement, console inspection and precise request-count verification remain outstanding.
 
 See [the audit](AUDIT.md) and [release checklist](RELEASE.md).
 
@@ -72,19 +72,15 @@ cd close-call-board && code .
 
 ## Publication
 
-Do not publish before completing `RELEASE.md`, especially the live data and browser checks. The source repository has been created. Pages publication and browser validation are being completed. No private credentials belong in this repository.
+The public dashboard is deployed from `main` / repository root via GitHub Pages.
 
-After the checklist passes, create and push a public repository using the authenticated account:
+**Live:** https://dext94.github.io/close-call-board/
 
-```sh
-git status
-gh auth status
-gh repo create close-call-board --public --source=. --remote=origin --push
-```
+**Source:** https://github.com/Dext94/close-call-board
 
-Then, on GitHub: **Settings → Pages → Deploy from a branch → main / (root) → Save**. GitHub will show the actual published URL; verify it before announcing the site. Update the two URL fields above and the Methodology source link after the repository exists. `.nojekyll` enables direct static asset serving.
+GitHub Pages reports the deployment as built and HTTPS is enforced. The public page has loaded with live referee data. Remaining browser QA items are tracked in `RELEASE.md`.
 
-If browser access fails due to CORS, stop. Do not add an undocumented proxy. A possible Plan B is a GET-only serverless endpoint with a hardcoded five-room allowlist, a 60-second cache, timeouts, response-size limits, preserved timestamps/hashes, and a documented upstream provenance field. It must never accept arbitrary upstream URLs or trading/signing operations. No proxy is included or deployed.
+If browser access fails due to CORS, do not add an undocumented proxy. A possible Plan B is a GET-only serverless endpoint with a hardcoded five-room allowlist, a 60-second cache, timeouts, response-size limits, preserved timestamps/hashes, and a documented upstream provenance field. It must never accept arbitrary upstream URLs or trading/signing operations. No proxy is included or deployed.
 
 ## Security
 
